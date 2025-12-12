@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neon Factory – Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html" class="active">Home</a>
+  <a href="products.html">Products</a>
+  <a href="about.html">About</a>
+  <a href="cart.html" class="active">Cart</a>
+</nav>
+
+<!-- HERO SECTION -->
+<div class="container">
+  <h1>Welcome to Modern Neon Signs</h1>
+  <p>Your custom neon signs & acrylic designs.</p>
+  <button onclick="window.location.href='products.html'">Shop Now</button>
+</div>
+
+<!-- POPULAR DESIGNS SECTION -->
+<div class="products container">
+  <h2>Popular Designs</h2>
+
+  <div class="product-grid">
+
+    <!-- Product 1 -->
+    <div class="card">
+      <img src="images/customname-neon.jpg" alt="Custom Single Name Neon sign">
+      <h3>Custom Single Name Neon sign</h3>
+      <p>Size: 9×15 inch, 1 year warranty – Chain/Clips, Power Adapter.</p>
+      <p><strong>Price: Rs.2500</strong></p>
+      <button onclick="addToCart(
+  'Custom Single Name', 
+  2500, 
+  'images/customname-neon.jpg'
+)">Add to Cart</button>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="card">
+     <img src="images/custom-acrylic-logo900.jpg" alt="Custom Acrylic Logo Model 900">
+      <h2>Custom Acrylic Logo Model 900</h2>
+      <p>Size:30x30 inch ,1 year waranty-"Chain/clips,Power Adapter"
+         </p>
+      <p><strong>Price: Rs.12000</strong></p>
+      <button onclick="addToCart(
+  'Custom Acrylic Backlight Logo Model 900',
+  12000,
+  'images/custom-acrylic-logo900.jpg'
+)">Add to Cart</button>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="card">
+      <img src="images/bismillah-neonsign.jpg" alt="Bismillah Neon sign">
+      <h3>Bismillah Neon sign</h3>
+      <p>Size:12 x42 inch
+         1 year warranty-Chain/Clips, Power Adapter.</p>
+      <p><strong>Price: Rs.8000</strong></p>
+      <button onclick="addToCart(
+  'Bismillah Neon sign',
+  8000,
+  'images/bismillah-neonsign.jpg'
+)">Add to Cart</button>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="card">
+      <img src="images/custom-3dsign1080.jpg" alt="Custom 3D sign Model 1080">
+      <h3>Custom 3D sign Model 1080</h3>
+      <p>Size:30x36 inch, 1 year warranty – Chain/Clips, Power Adapter</p>
+      <p><strong>Price: Rs.15000</strong></p>
+      <button onclick="addToCart(
+  'Custom 3D sign Model 1080',
+  15000,
+  'images/custom-3dsign1080.jpg'
+)">Add to Cart</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ABOUT US SECTION -->
+<div class="about container">
+  <h2>About Us</h2>
+  <p>
+    We create premium custom neon signs and acrylic designs with safe LED lighting.
+    Every piece is crafted to deliver bright, long-lasting glow.
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Neon Factory — All Rights Reserved
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+<a class="whatsapp-btn" href="https://wa.me/923009692219" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<script>
+function addToCart(name, price, image) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  let existing = cart.find(item => item.name === name);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({
+      name,
+      price,
+      image,
+      qty: 1
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(name + " added to cart!");
+}
+</script>
+
+</body>
+</html>
