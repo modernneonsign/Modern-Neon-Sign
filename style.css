@@ -1,0 +1,237 @@
+/* -------------------------------------------------
+   GLOBAL BODY
+------------------------------------------------- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+/* -------------------------------------------------
+   NAVIGATION — SAME ON ALL PAGES
+------------------------------------------------- */
+nav {
+  background: #111;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  border-bottom: 2px solid #ff1a1a;
+  box-shadow:
+    0 0 2px #ff1a1a,
+    0 0 6px #ff3333;   /* Soft glow */
+}
+
+nav a {
+  color: #ff4d4d;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: 0.2s;
+  text-shadow: 0 0 2px #ff1a1a;
+}
+
+nav a:hover,
+nav a.active {
+  color: #fff;
+  text-shadow: 0 0 6px #ff3333;
+}
+
+/* -------------------------------------------------
+   CONTAINER
+------------------------------------------------- */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* -------------------------------------------------
+   NEON HEADINGS
+------------------------------------------------- */
+h1, h2, h3 {
+  color: #ff1a1a !important;
+  text-shadow:
+    0 0 2px #ff1a1a,
+    0 0 4px #ff1a1a,
+    0 0 6px #ff3333;
+}
+
+/* Hero large title */
+.hero-title {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+/* -------------------------------------------------
+   HERO SECTION
+------------------------------------------------- */
+.hero {
+  padding: 80px 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* -------------------------------------------------
+   BUTTONS
+------------------------------------------------- */
+button {
+  background: #ff1a1a;
+  padding: 10px 20px;
+  border: none;
+  color: #000;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+  box-shadow:
+    0 0 2px #ff1a1a,
+    0 0 6px #ff3333;
+}
+
+button:hover {
+  opacity: 0.9;
+  box-shadow:
+    0 0 3px #ff1a1a,
+    0 0 8px #ff3333;
+}
+
+/* -------------------------------------------------
+   PRODUCT GRID
+------------------------------------------------- */
+.product-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* PRODUCT CARDS */
+.card,
+.product-card {
+  background: #111;
+  width: 230px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #ff1a1a;
+  box-shadow:
+    0 0 2px #ff1a1a,
+    0 0 6px #ff3333;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* Hover animation */
+.card:hover,
+.product-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: #ff4d4d;
+  box-shadow:
+    0 0 4px #ff1a1a,
+    0 0 10px #ff3333;
+}
+
+/* Click (press) animation */
+.card:active,
+.product-card:active {
+  transform: scale(0.95);
+}
+
+/* Product image inside card */
+.product-card img,
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  transition: transform 0.3s;
+}
+
+.product-card img:hover,
+.card img:hover {
+  transform: scale(1.05);
+}
+
+/* -------------------------------------------------
+   ABOUT SECTION
+------------------------------------------------- */
+.about {
+  background: #0d0d0d;
+  padding: 40px 20px;
+  margin-top: 40px;
+}
+
+.about p {
+  max-width: 700px;
+  margin: auto;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* -------------------------------------------------
+   FOOTER
+------------------------------------------------- */
+footer {
+  background: #111;
+  padding: 20px;
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 40px;
+}
+
+/* -------------------------------------------------
+   FORM INPUTS
+------------------------------------------------- */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #222;
+  color: #fff;
+  box-shadow:
+    0 0 2px #ff1a1a,
+    0 0 6px #ff3333;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow:
+    0 0 3px #ff1a1a,
+    0 0 8px #ff3333;
+}
+
+/* -------------------------------------------------
+   WHATSAPP BUTTON
+------------------------------------------------- */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Circle shape */
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.3s;
+  box-shadow: 0 0 6px #25D366, 0 0 12px #25D366; /* Glow effect */
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #25D366, 0 0 20px #25D366; /* Stronger glow on hover */
+}
+
+.whatsapp-btn img {
+  width: 32px;
+}
