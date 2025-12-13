@@ -3,7 +3,7 @@
 <head>
   <title>Cart</title>
 
-  <!-- IMPORTANT: Mobile responsive -->
+  <!-- Mobile responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="style.css">
@@ -85,9 +85,9 @@
 
     .modal-content {
       background: #111;
-      max-width: 500px;
+      max-width: 550px; /* Adjusted width */
       margin: 10% auto;
-      padding: 20px;
+      padding: 25px;
       border-radius: 10px;
       border: 2px solid #ff1a1a;
     }
@@ -96,7 +96,7 @@
     .modal-content textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 8px;
+      margin-top: 10px;
       background: #222;
       color: #fff;
       border: 1px solid #ff1a1a;
@@ -106,7 +106,7 @@
     .place-order {
       background: #ff1a1a;
       border: none;
-      padding: 10px;
+      padding: 12px;
       width: 100%;
       margin-top: 15px;
       font-weight: bold;
@@ -157,10 +157,9 @@
     <h2>Checkout</h2>
 
     <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
     <input type="text" id="phone" placeholder="Phone Number" required>
     <textarea id="address" placeholder="Delivery Address" required></textarea>
-
-    <!-- ONLY ONE instruction field -->
     <textarea id="instructions" placeholder="Neon color, font style, size, other instructions"></textarea>
 
     <button class="place-order" onclick="placeOrder()">Place Order</button>
@@ -186,12 +185,7 @@ function loadCart() {
   document.getElementById("checkout-btn").style.display = "block";
 
   cart.forEach((item, index) => {
-
-    // ✅ FIX UNDEFINED QUANTITY
-    if (!item.quantity || item.quantity < 1) {
-      item.quantity = 1;
-    }
-
+    if (!item.quantity || item.quantity < 1) item.quantity = 1;
     let itemTotal = item.price * item.quantity;
     total += itemTotal;
 
@@ -199,13 +193,11 @@ function loadCart() {
       <div class="cart-item">
         <h3>${item.name}</h3>
         <p>₨ ${item.price}</p>
-
         <div class="qty-box">
           <button onclick="updateQty(${index}, -1)">−</button>
           <span>${item.quantity}</span>
           <button onclick="updateQty(${index}, 1)">+</button>
         </div>
-
         <p><strong>₨ ${itemTotal}</strong></p>
         <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
       </div>
@@ -219,9 +211,7 @@ function loadCart() {
 function updateQty(i, change) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart[i].quantity += change;
-
   if (cart[i].quantity < 1) cart[i].quantity = 1;
-
   localStorage.setItem("cart", JSON.stringify(cart));
   loadCart();
 }
@@ -238,7 +228,17 @@ function showCheckout() {
 }
 
 function placeOrder() {
-  alert("Order placed successfully!");
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+
+  if(!name || !email || !phone || !address) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  alert("Order placed successfully! We will contact you at " + email);
   localStorage.removeItem("cart");
   loadCart();
   document.getElementById("checkout-modal").style.display = "none";
