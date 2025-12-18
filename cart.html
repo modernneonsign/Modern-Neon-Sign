@@ -1,154 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Cart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
-<style>
-body {
-  background:#000;
-  color:#fff;
-  font-family: Arial, sans-serif;
-}
+  <style>
+    body{background:#000;color:#fff;font-family:Arial}
 
-/* CART */
-.cart-container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 20px;
-}
+    .cart-container{
+      max-width:900px;
+      margin:20px auto;
+      padding:15px;
+    }
 
-.cart-item {
-  border: 2px solid #ff1a1a;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 10px #ff1a1a;
-  text-align: center;
-}
+    h1{text-align:center;color:#ff1a1a}
 
-.qty-box {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 10px 0;
-}
+    .cart-item{
+      border:2px solid #ff1a1a;
+      border-radius:14px;
+      padding:15px;
+      margin-bottom:18px;
+      box-shadow:0 0 10px #ff1a1a;
+      text-align:center;
+    }
 
-.qty-box button {
-  background:#ff1a1a;
-  border:none;
-  padding:6px 14px;
-  border-radius:6px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .qty-box{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      margin:12px 0;
+    }
 
-.remove-btn {
-  margin-top:10px;
-  background:#ff1a1a;
-  border:none;
-  padding:6px 16px;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-}
+    .qty-box button{
+      background:#ff1a1a;
+      border:none;
+      padding:10px 18px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+    }
 
-#total {
-  text-align:center;
-  font-size:22px;
-  color:#ff1a1a;
-  margin:20px 0;
-}
+    .remove-btn{
+      background:#ff1a1a;
+      border:none;
+      padding:8px 20px;
+      border-radius:8px;
+      font-weight:bold;
+      cursor:pointer;
+      margin-top:10px;
+    }
 
-/* CHECKOUT BUTTON */
-#checkout-btn {
-  display:block;
-  margin: 0 auto;
-  padding:12px 30px;
-  background:#ff1a1a;
-  border:none;
-  border-radius:10px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 10px #ff1a1a;
-}
+    #total{
+      text-align:center;
+      font-size:22px;
+      margin:20px 0;
+      color:#ff1a1a;
+    }
 
-/* MODAL */
-.modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  z-index:999;
-}
+    #checkout-btn{
+      display:block;
+      margin:0 auto;
+      padding:14px 35px;
+      background:#ff1a1a;
+      border:none;
+      border-radius:12px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 0 10px #ff1a1a;
+    }
 
-.modal-content {
-  background:#111;
-  max-width:420px;
-  width:90%;
-  margin:6% auto;
-  padding:25px;
-  border-radius:15px;
-  border:2px solid #ff1a1a;
-  box-shadow:0 0 15px #ff1a1a;
-  overflow:hidden;
-}
+    /* MODAL */
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.85);
+      z-index:999;
+      padding:10px;
+    }
 
-.modal-content h2 {
-  text-align:center;
-  color:#ff1a1a;
-  margin-bottom:15px;
-}
+    .modal-content{
+      background:#111;
+      max-width:420px;
+      width:100%;
+      margin:auto;
+      padding:22px;
+      border-radius:16px;
+      border:2px solid #ff1a1a;
+      box-shadow:0 0 15px #ff1a1a;
+    }
 
-.modal-content input,
-.modal-content textarea {
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  background:#222;
-  color:#fff;
-  border:1px solid #ff1a1a;
-  border-radius:8px;
-  box-sizing:border-box;
-}
+    .modal-content h2{
+      text-align:center;
+      color:#ff1a1a;
+      margin-bottom:15px;
+    }
 
-.modal-content textarea {
-  resize:none;
-}
+    .modal-content input,
+    .modal-content textarea{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      background:#222;
+      color:#fff;
+      border:1px solid #ff1a1a;
+      border-radius:10px;
+    }
 
-.place-order {
-  margin-top:15px;
-  width:100%;
-  padding:12px;
-  background:#ff1a1a;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .place-order,
+    .whatsapp-btn{
+      margin-top:12px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+    }
 
-.whatsapp-btn {
-  margin-top:10px;
-  width:100%;
-  padding:10px;
-  background:#25D366;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  color:#000;
-}
+    .place-order{background:#ff1a1a}
+    .whatsapp-btn{background:#25D366;color:#000}
 
-/* MOBILE */
-@media(max-width:600px){
-  .modal-content {
-    margin-top:15%;
-  }
-}
-</style>
+    @media(max-width:600px){
+      h1{font-size:22px}
+      #checkout-btn{width:100%}
+    }
+  </style>
 </head>
 
 <body>
@@ -161,39 +143,32 @@ body {
 </nav>
 
 <div class="cart-container">
-  <h1 style="text-align:center;color:#ff1a1a;">Your Cart</h1>
+  <h1>Your Cart</h1>
   <div id="cart-items"></div>
   <div id="total">Total: ₨ 0</div>
   <button id="checkout-btn" onclick="openCheckout()">Checkout</button>
 </div>
 
-<!-- CHECKOUT MODAL -->
+<!-- CHECKOUT -->
 <div class="modal" id="checkoutModal">
   <div class="modal-content">
-
     <h2>Checkout</h2>
 
-    <!-- WEB3FORMS -->
     <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
-
       <input type="hidden" name="access_key" value="41466539-4bd3-4013-8536-d1e59d78d0f0">
-      <input type="hidden" name="subject" value="New Neon Sign Order">
-      <input type="hidden" name="from_name" value="Neon Factory Website">
+      <input type="hidden" name="subject" value="New Neon Order">
+      <input type="hidden" name="cart_details" id="cartDetails">
 
-      <input type="text" name="name" id="custName" placeholder="Your Name" required>
+      <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="text" name="phone" placeholder="Phone Number" required>
       <textarea name="address" placeholder="Delivery Address" required></textarea>
-
       <textarea name="instructions" placeholder="Neon color, font, size, other instructions"></textarea>
 
-      <textarea name="order_details" id="orderDetails" hidden></textarea>
-
-      <button type="submit" class="place-order">Place Order</button>
+      <button class="place-order" type="submit">Place Order</button>
     </form>
 
-    <button class="whatsapp-btn" onclick="sendWhatsApp()">Order on WhatsApp</button>
-
+    <button class="whatsapp-btn" onclick="sendWhatsApp()">Send Order on WhatsApp</button>
   </div>
 </div>
 
@@ -202,87 +177,70 @@ function loadCart(){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let box = document.getElementById("cart-items");
   let totalEl = document.getElementById("total");
-  let total = 0;
+  box.innerHTML="";
+  let total=0;
 
-  box.innerHTML = "";
-
-  if(cart.length === 0){
-    box.innerHTML = "<p style='text-align:center'>Your cart is empty</p>";
+  if(cart.length===0){
+    box.innerHTML="<p>Your cart is empty.</p>";
     document.getElementById("checkout-btn").style.display="none";
-    totalEl.innerHTML="Total: ₨ 0";
     return;
   }
 
   document.getElementById("checkout-btn").style.display="block";
 
   cart.forEach((item,i)=>{
-    if(!item.quantity || item.quantity < 1) item.quantity = 1;
-    if(!item.name) item.name = "Neon Sign";
+    if(!item.name) item.name="Custom Neon";
+    if(!item.quantity) item.quantity=1;
 
-    let itemTotal = item.price * item.quantity;
-    total += itemTotal;
+    let price=item.price*item.quantity;
+    total+=price;
 
-    box.innerHTML += `
+    box.innerHTML+=`
       <div class="cart-item">
         <h3>${item.name}</h3>
         <p>₨ ${item.price}</p>
         <div class="qty-box">
-          <button onclick="changeQty(${i},-1)">−</button>
+          <button onclick="qty(${i},-1)">−</button>
           <span>${item.quantity}</span>
-          <button onclick="changeQty(${i},1)">+</button>
+          <button onclick="qty(${i},1)">+</button>
         </div>
-        <strong>₨ ${itemTotal}</strong><br>
+        <p><strong>₨ ${price}</strong></p>
         <button class="remove-btn" onclick="removeItem(${i})">Remove</button>
-      </div>
-    `;
+      </div>`;
   });
 
-  totalEl.innerHTML = "Total: ₨ " + total;
-  localStorage.setItem("cart", JSON.stringify(cart));
+  totalEl.innerHTML="Total: ₨ "+total;
+  localStorage.setItem("cart",JSON.stringify(cart));
 }
 
-function changeQty(i,val){
-  let cart = JSON.parse(localStorage.getItem("cart"));
-  cart[i].quantity += val;
-  if(cart[i].quantity < 1) cart[i].quantity = 1;
-  localStorage.setItem("cart", JSON.stringify(cart));
+function qty(i,c){
+  let cart=JSON.parse(localStorage.getItem("cart"));
+  cart[i].quantity+=c;
+  if(cart[i].quantity<1) cart[i].quantity=1;
+  localStorage.setItem("cart",JSON.stringify(cart));
   loadCart();
 }
 
 function removeItem(i){
-  let cart = JSON.parse(localStorage.getItem("cart"));
+  let cart=JSON.parse(localStorage.getItem("cart"));
   cart.splice(i,1);
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart",JSON.stringify(cart));
   loadCart();
 }
 
 function openCheckout(){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let text = "";
-  let total = 0;
-
-  cart.forEach(p=>{
-    text += `${p.name} x ${p.quantity} = ₨ ${p.price * p.quantity}\n`;
-    total += p.price * p.quantity;
-  });
-
-  text += `\nTotal: ₨ ${total}`;
-  document.getElementById("orderDetails").value = text;
-  document.getElementById("checkoutModal").style.display="block";
+  document.getElementById("checkoutModal").style.display="flex";
+  document.getElementById("cartDetails").value =
+    JSON.stringify(JSON.parse(localStorage.getItem("cart")));
 }
 
 function sendWhatsApp(){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let msg = "New Order:%0A";
-  let total = 0;
-
-  cart.forEach(p=>{
-    msg += `${p.name} x ${p.quantity} = Rs ${p.price * p.quantity}%0A`;
-    total += p.price * p.quantity;
+  let cart=JSON.parse(localStorage.getItem("cart"))||[];
+  let msg="New Neon Order:%0A";
+  cart.forEach(i=>{
+    msg+=`${i.name} x ${i.quantity} = Rs ${i.price*i.quantity}%0A`;
   });
-
-  msg += `%0ATotal: Rs ${total}`;
-  window.open("https://wa.me/923000767300?text="+msg,"_blank");
+  window.open(`https://wa.me/923000767300?text=${msg}`,"_blank");
 }
 
 loadCart();
