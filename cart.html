@@ -1,138 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Cart</title>
+<meta charset="UTF-8">
+<title>Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- IMPORTANT: Mobile responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css">
+<style>
+body {
+  background:#000;
+  color:#fff;
+  font-family: Arial, sans-serif;
+}
 
-  <style>
-    /* Cart container */
-    .cart-container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-    }
+/* CART */
+.cart-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+}
 
-    .cart-item {
-      border: 2px solid #ff1a1a;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 6px #ff3333;
-    }
+.cart-item {
+  border: 2px solid #ff1a1a;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px #ff1a1a;
+  text-align: center;
+}
 
-    .qty-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
+.qty-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 10px 0;
+}
 
-    .qty-box button {
-      background: #ff1a1a;
-      color: #000;
-      border: none;
-      padding: 5px 12px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 0 5px #ff3333;
-    }
+.qty-box button {
+  background:#ff1a1a;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    .remove-btn {
-      background: #ff1a1a;
-      border: none;
-      padding: 6px 15px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 5px #ff3333;
-    }
+.remove-btn {
+  margin-top:10px;
+  background:#ff1a1a;
+  border:none;
+  padding:6px 16px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    #checkout-btn {
-      display: block;
-      margin: 25px auto;
-      padding: 12px 25px;
-      background: #ff1a1a;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      box-shadow: 0 0 8px #ff3333;
-      cursor: pointer;
-    }
+#total {
+  text-align:center;
+  font-size:22px;
+  color:#ff1a1a;
+  margin:20px 0;
+}
 
-    #total {
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      color: #ff1a1a;
-    }
+/* CHECKOUT BUTTON */
+#checkout-btn {
+  display:block;
+  margin: 0 auto;
+  padding:12px 30px;
+  background:#ff1a1a;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 10px #ff1a1a;
+}
 
-    /* Checkout modal */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      z-index: 999;
-    }
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  z-index:999;
+}
 
-    .modal-content {
-      background: #111;
-      max-width: 500px;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px solid #ff1a1a;
-    }
+.modal-content {
+  background:#111;
+  max-width:420px;
+  width:90%;
+  margin:6% auto;
+  padding:25px;
+  border-radius:15px;
+  border:2px solid #ff1a1a;
+  box-shadow:0 0 15px #ff1a1a;
+  overflow:hidden;
+}
 
-    .modal-content input,
-    .modal-content textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      background: #222;
-      color: #fff;
-      border: 1px solid #ff1a1a;
-      border-radius: 6px;
-    }
+.modal-content h2 {
+  text-align:center;
+  color:#ff1a1a;
+  margin-bottom:15px;
+}
 
-    .place-order {
-      background: #ff1a1a;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      margin-top: 15px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+.modal-content input,
+.modal-content textarea {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  background:#222;
+  color:#fff;
+  border:1px solid #ff1a1a;
+  border-radius:8px;
+  box-sizing:border-box;
+}
 
-    /* MOBILE FRIENDLY */
-    @media (max-width: 768px) {
-      .cart-container {
-        padding: 10px;
-      }
+.modal-content textarea {
+  resize:none;
+}
 
-      .cart-item {
-        text-align: center;
-      }
+.place-order {
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  background:#ff1a1a;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-      .qty-box {
-        justify-content: center;
-      }
+.whatsapp-btn {
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  background:#25D366;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  color:#000;
+}
 
-      #checkout-btn {
-        width: 100%;
-      }
-    }
-  </style>
+/* MOBILE */
+@media(max-width:600px){
+  .modal-content {
+    margin-top:15%;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -145,69 +161,78 @@
 </nav>
 
 <div class="cart-container">
-  <h1>Your Cart</h1>
+  <h1 style="text-align:center;color:#ff1a1a;">Your Cart</h1>
   <div id="cart-items"></div>
   <div id="total">Total: ₨ 0</div>
-  <button id="checkout-btn" onclick="showCheckout()">Checkout</button>
+  <button id="checkout-btn" onclick="openCheckout()">Checkout</button>
 </div>
 
 <!-- CHECKOUT MODAL -->
-<div id="checkout-modal" class="modal">
+<div class="modal" id="checkoutModal">
   <div class="modal-content">
+
     <h2>Checkout</h2>
 
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="text" id="phone" placeholder="Phone Number" required>
-    <textarea id="address" placeholder="Delivery Address" required></textarea>
+    <!-- WEB3FORMS -->
+    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
 
-    <!-- ONLY ONE instruction field -->
-    <textarea id="instructions" placeholder="Neon color, font style, size, other instructions"></textarea>
+      <input type="hidden" name="access_key" value="41466539-4bd3-4013-8536-d1e59d78d0f0">
+      <input type="hidden" name="subject" value="New Neon Sign Order">
+      <input type="hidden" name="from_name" value="Neon Factory Website">
 
-    <button class="place-order" onclick="placeOrder()">Place Order</button>
+      <input type="text" name="name" id="custName" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="phone" placeholder="Phone Number" required>
+      <textarea name="address" placeholder="Delivery Address" required></textarea>
+
+      <textarea name="instructions" placeholder="Neon color, font, size, other instructions"></textarea>
+
+      <textarea name="order_details" id="orderDetails" hidden></textarea>
+
+      <button type="submit" class="place-order">Place Order</button>
+    </form>
+
+    <button class="whatsapp-btn" onclick="sendWhatsApp()">Order on WhatsApp</button>
+
   </div>
 </div>
 
 <script>
-function loadCart() {
+function loadCart(){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let cartBox = document.getElementById("cart-items");
+  let box = document.getElementById("cart-items");
   let totalEl = document.getElementById("total");
-
-  cartBox.innerHTML = "";
   let total = 0;
 
-  if (cart.length === 0) {
-    cartBox.innerHTML = "<p>Your cart is empty.</p>";
-    totalEl.innerHTML = "Total: ₨ 0";
-    document.getElementById("checkout-btn").style.display = "none";
+  box.innerHTML = "";
+
+  if(cart.length === 0){
+    box.innerHTML = "<p style='text-align:center'>Your cart is empty</p>";
+    document.getElementById("checkout-btn").style.display="none";
+    totalEl.innerHTML="Total: ₨ 0";
     return;
   }
 
-  document.getElementById("checkout-btn").style.display = "block";
+  document.getElementById("checkout-btn").style.display="block";
 
-  cart.forEach((item, index) => {
-
-    // ✅ FIX UNDEFINED QUANTITY
-    if (!item.quantity || item.quantity < 1) {
-      item.quantity = 1;
-    }
+  cart.forEach((item,i)=>{
+    if(!item.quantity || item.quantity < 1) item.quantity = 1;
+    if(!item.name) item.name = "Neon Sign";
 
     let itemTotal = item.price * item.quantity;
     total += itemTotal;
 
-    cartBox.innerHTML += `
+    box.innerHTML += `
       <div class="cart-item">
         <h3>${item.name}</h3>
         <p>₨ ${item.price}</p>
-
         <div class="qty-box">
-          <button onclick="updateQty(${index}, -1)">−</button>
+          <button onclick="changeQty(${i},-1)">−</button>
           <span>${item.quantity}</span>
-          <button onclick="updateQty(${index}, 1)">+</button>
+          <button onclick="changeQty(${i},1)">+</button>
         </div>
-
-        <p><strong>₨ ${itemTotal}</strong></p>
-        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        <strong>₨ ${itemTotal}</strong><br>
+        <button class="remove-btn" onclick="removeItem(${i})">Remove</button>
       </div>
     `;
   });
@@ -216,32 +241,48 @@ function loadCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function updateQty(i, change) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart[i].quantity += change;
-
-  if (cart[i].quantity < 1) cart[i].quantity = 1;
-
+function changeQty(i,val){
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  cart[i].quantity += val;
+  if(cart[i].quantity < 1) cart[i].quantity = 1;
   localStorage.setItem("cart", JSON.stringify(cart));
   loadCart();
 }
 
-function removeItem(i) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(i, 1);
+function removeItem(i){
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  cart.splice(i,1);
   localStorage.setItem("cart", JSON.stringify(cart));
   loadCart();
 }
 
-function showCheckout() {
-  document.getElementById("checkout-modal").style.display = "block";
+function openCheckout(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let text = "";
+  let total = 0;
+
+  cart.forEach(p=>{
+    text += `${p.name} x ${p.quantity} = ₨ ${p.price * p.quantity}\n`;
+    total += p.price * p.quantity;
+  });
+
+  text += `\nTotal: ₨ ${total}`;
+  document.getElementById("orderDetails").value = text;
+  document.getElementById("checkoutModal").style.display="block";
 }
 
-function placeOrder() {
-  alert("Order placed successfully!");
-  localStorage.removeItem("cart");
-  loadCart();
-  document.getElementById("checkout-modal").style.display = "none";
+function sendWhatsApp(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let msg = "New Order:%0A";
+  let total = 0;
+
+  cart.forEach(p=>{
+    msg += `${p.name} x ${p.quantity} = Rs ${p.price * p.quantity}%0A`;
+    total += p.price * p.quantity;
+  });
+
+  msg += `%0ATotal: Rs ${total}`;
+  window.open("https://wa.me/923000767300?text="+msg,"_blank");
 }
 
 loadCart();
