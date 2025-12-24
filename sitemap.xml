@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://modernneonsign.github.io/Modern-Neon-Sign/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Products page -->
+  <url>
+    <loc>https://modernneonsign.github.io/Modern-Neon-Sign/products.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About page -->
+  <url>
+    <loc>https://modernneonsign.github.io/Modern-Neon-Sign/about.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Cart / Checkout page -->
+  <url>
+    <loc>https://modernneonsign.github.io/Modern-Neon-Sign/cart.html</loc>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
