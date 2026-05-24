@@ -7,431 +7,158 @@
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --red:    #ff2d2d;
-  --orange: #ff6a00;
-  --amber:  #ffaa00;
-  --bg:     #080808;
-  --bg2:    #0f0f0f;
-  --card:   #141414;
-  --text:   #f0e8e0;
-  --sub:    #998880;
-  --glow-r: 0 0 8px #ff2d2d, 0 0 20px #ff2d2d88, 0 0 40px #ff2d2d44;
-  --glow-o: 0 0 8px #ff6a00, 0 0 20px #ff6a0088, 0 0 40px #ff6a0044;
-  --glow-a: 0 0 8px #ffaa00, 0 0 20px #ffaa0088, 0 0 40px #ffaa0044;
+  --red:#ff2d2d; --orange:#ff6a00; --amber:#ffaa00;
+  --bg:#080808; --bg2:#0f0f0f; --card:#141414;
+  --text:#f0e8e0; --sub:#998880;
+  --glow-r:0 0 8px #ff2d2d,0 0 20px #ff2d2d88,0 0 40px #ff2d2d44;
+  --glow-o:0 0 8px #ff6a00,0 0 20px #ff6a0088,0 0 40px #ff6a0044;
+  --glow-a:0 0 8px #ffaa00,0 0 20px #ffaa0088,0 0 40px #ffaa0044;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none;}
+#cursor{width:14px;height:14px;background:var(--orange);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;box-shadow:var(--glow-o);transform:translate(-50%,-50%);transition:transform 0.08s;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:1000;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(8,8,8,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,106,0,0.15);}
+.nav-logo{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;color:var(--orange);text-shadow:var(--glow-o);letter-spacing:2px;text-decoration:none;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{color:var(--sub);text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s,text-shadow 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--orange);text-shadow:var(--glow-o);}
+.page{display:none;padding-top:80px;min-height:100vh;}
+.page.active{display:block;}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* HOME */
+.hero{position:relative;min-height:calc(100vh - 80px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:60px 24px;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,106,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,106,0,0.04) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite;}
+@keyframes gridMove{to{background-position:60px 60px;}}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:float 8s ease-in-out infinite;}
+.orb1{width:400px;height:400px;background:rgba(255,45,45,0.12);top:-100px;left:-100px;}
+.orb2{width:300px;height:300px;background:rgba(255,106,0,0.10);bottom:0;right:-80px;animation-delay:-3s;}
+.orb3{width:200px;height:200px;background:rgba(255,170,0,0.08);top:50%;left:50%;animation-delay:-5s;}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.05);}}
+.hero-eyebrow{font-size:0.75rem;letter-spacing:5px;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:20px;text-shadow:var(--glow-o);position:relative;animation:fadeDown 0.8s ease both;}
+.hero h1{font-family:'Orbitron',monospace;font-size:clamp(2.8rem,8vw,6rem);font-weight:900;line-height:1.05;position:relative;animation:fadeDown 0.9s ease both 0.1s;}
+.hero h1 .neon-r{color:var(--red);text-shadow:var(--glow-r);}
+.hero h1 .neon-o{color:var(--orange);text-shadow:var(--glow-o);}
+.flicker{animation:flicker 4s infinite;}
+@keyframes flicker{0%,19%,21%,23%,25%,54%,56%,100%{opacity:1;}20%,24%,55%{opacity:0.6;}}
+.hero-sub{font-size:1rem;color:var(--sub);max-width:520px;margin:20px auto 0;line-height:1.7;position:relative;animation:fadeDown 1s ease both 0.2s;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:40px;position:relative;animation:fadeDown 1s ease both 0.3s;}
+.btn-primary{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:none;padding:14px 36px;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;border-radius:4px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 0 20px rgba(255,106,0,0.4);transition:box-shadow 0.3s,transform 0.2s;text-decoration:none;display:inline-block;}
+.btn-primary:hover{box-shadow:0 0 40px rgba(255,106,0,0.7);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--orange);border:1.5px solid var(--orange);padding:14px 36px;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:700;border-radius:4px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.btn-secondary:hover{background:var(--orange);color:#000;box-shadow:var(--glow-o);}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+.stats{display:flex;justify-content:center;flex-wrap:wrap;background:var(--bg2);border-top:1px solid rgba(255,106,0,0.12);border-bottom:1px solid rgba(255,106,0,0.12);}
+.stat-item{padding:32px 48px;text-align:center;border-right:1px solid rgba(255,106,0,0.1);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Orbitron',monospace;font-size:2.2rem;font-weight:900;color:var(--orange);text-shadow:var(--glow-o);display:block;}
+.stat-label{font-size:0.78rem;color:var(--sub);letter-spacing:2px;text-transform:uppercase;margin-top:4px;display:block;}
+.section{padding:80px 24px;max-width:1100px;margin:0 auto;}
+.section-title{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;text-align:center;margin-bottom:8px;color:var(--orange);text-shadow:var(--glow-o);}
+.section-sub{text-align:center;color:var(--sub);font-size:0.9rem;margin-bottom:48px;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;}
+.service-card{background:var(--card);border:1px solid rgba(255,106,0,0.12);border-radius:8px;padding:32px 24px;text-align:center;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;}
+.service-card:hover{border-color:var(--orange);transform:translateY(-6px);box-shadow:0 0 30px rgba(255,106,0,0.15);}
+.service-icon{font-size:2.5rem;margin-bottom:16px;display:block;}
+.service-card h3{font-family:'Orbitron',monospace;font-size:0.85rem;color:var(--orange);margin-bottom:10px;letter-spacing:1px;}
+.service-card p{font-size:0.82rem;color:var(--sub);line-height:1.6;}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+.why-card{background:var(--card);border-radius:8px;padding:24px;border-left:3px solid var(--orange);transition:box-shadow 0.3s;}
+.why-card:hover{box-shadow:-4px 0 20px rgba(255,106,0,0.2);}
+.why-card h4{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.why-card p{font-size:0.82rem;color:var(--sub);line-height:1.6;}
 
-html { scroll-behavior: smooth; }
+/* GALLERY */
+.gallery-hero{text-align:center;padding:60px 24px 30px;background:linear-gradient(180deg,rgba(255,45,45,0.05) 0%,transparent 100%);}
+.gallery-hero h2{font-family:'Orbitron',monospace;font-size:2.2rem;font-weight:900;color:var(--orange);text-shadow:var(--glow-o);}
+.gallery-hero p{color:var(--sub);margin-top:10px;font-size:0.9rem;}
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: none;
-}
+/* Category filter tabs */
+.filter-wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:0 24px 32px;max-width:1100px;margin:0 auto;}
+.filter-btn{padding:8px 20px;border-radius:20px;border:1.5px solid rgba(255,106,0,0.25);background:transparent;color:var(--sub);font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--orange);color:#000;border-color:var(--orange);box-shadow:var(--glow-o);}
 
-/* ── Custom cursor ── */
-#cursor {
-  width: 14px; height: 14px;
-  background: var(--orange);
-  border-radius: 50%;
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  box-shadow: var(--glow-o);
-  transform: translate(-50%,-50%);
-  transition: transform 0.08s;
-}
+/* Category label */
+.cat-label{font-family:'Orbitron',monospace;font-size:1rem;color:var(--orange);text-shadow:var(--glow-o);padding:0 24px;max-width:1100px;margin:0 auto 16px;display:block;}
 
-/* ── Scanline overlay ── */
-body::after {
-  content:''; position:fixed; inset:0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-  pointer-events:none; z-index:1000;
-}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:0 24px 20px;max-width:1100px;margin:0 auto;}
+.gallery-item{position:relative;border-radius:8px;overflow:hidden;border:1px solid rgba(255,106,0,0.1);aspect-ratio:4/3;background:var(--card);cursor:pointer;transition:border-color 0.3s,transform 0.3s;}
+.gallery-item:hover{border-color:var(--orange);transform:scale(1.02);}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item:hover .gallery-overlay{opacity:1;}
+.gallery-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;}
+.gallery-overlay span{color:var(--orange);font-size:0.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.gallery-overlay small{color:#ccc;font-size:0.75rem;margin-top:6px;}
+.gallery-tag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.75);border:1px solid var(--orange);color:var(--orange);font-size:0.68rem;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;z-index:2;}
+.gallery-cta{text-align:center;padding:40px 24px 80px;}
+.gallery-cta h3{font-family:'Orbitron',monospace;font-size:1.4rem;color:var(--text);margin-bottom:10px;}
+.gallery-cta p{color:var(--sub);margin-bottom:28px;}
 
-/* ── Nav ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 48px;
-  background: rgba(8,8,8,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,106,0,0.15);
-}
-.nav-logo {
-  font-family: 'Orbitron', monospace;
-  font-size: 1.1rem; font-weight: 900;
-  color: var(--orange);
-  text-shadow: var(--glow-o);
-  letter-spacing: 2px;
-  text-decoration: none;
-}
-.nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a {
-  color: var(--sub); text-decoration: none;
-  font-size: 0.85rem; font-weight: 600;
-  letter-spacing: 2px; text-transform: uppercase;
-  transition: color 0.2s, text-shadow 0.2s;
-}
-.nav-links a:hover, .nav-links a.active {
-  color: var(--orange);
-  text-shadow: var(--glow-o);
-}
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;align-items:center;justify-content:center;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:88vh;border-radius:8px;border:2px solid var(--orange);box-shadow:var(--glow-o);}
+.lb-close{position:absolute;top:20px;right:28px;font-size:2rem;color:var(--orange);cursor:pointer;font-weight:900;line-height:1;}
+.lb-close:hover{color:var(--red);}
 
-/* ── Pages ── */
-.page { display: none; padding-top: 80px; min-height: 100vh; }
-.page.active { display: block; }
-
-/* ══════════════════════════════════════
-   HOME PAGE
-══════════════════════════════════════ */
-.hero {
-  position: relative; min-height: calc(100vh - 80px);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; overflow: hidden;
-  padding: 60px 24px;
-}
-
-/* animated bg grid */
-.hero::before {
-  content:''; position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(255,106,0,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,106,0,0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridMove 20s linear infinite;
-}
-@keyframes gridMove { to { background-position: 60px 60px; } }
-
-/* floating orbs */
-.orb {
-  position: absolute; border-radius: 50%;
-  filter: blur(80px); pointer-events: none; animation: float 8s ease-in-out infinite;
-}
-.orb1 { width:400px; height:400px; background:rgba(255,45,45,0.12); top:-100px; left:-100px; animation-delay:0s; }
-.orb2 { width:300px; height:300px; background:rgba(255,106,0,0.10); bottom:0; right:-80px; animation-delay:-3s; }
-.orb3 { width:200px; height:200px; background:rgba(255,170,0,0.08); top:50%; left:50%; animation-delay:-5s; }
-@keyframes float {
-  0%,100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(-30px) scale(1.05); }
-}
-
-.hero-eyebrow {
-  font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--orange); font-weight: 600; margin-bottom: 20px;
-  text-shadow: var(--glow-o); position: relative;
-  animation: fadeDown 0.8s ease both;
-}
-.hero h1 {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(2.8rem, 8vw, 6rem);
-  font-weight: 900; line-height: 1.05;
-  position: relative; animation: fadeDown 0.9s ease both 0.1s;
-}
-.hero h1 .neon-r { color: var(--red); text-shadow: var(--glow-r); }
-.hero h1 .neon-o { color: var(--orange); text-shadow: var(--glow-o); }
-
-/* flicker animation */
-.flicker { animation: flicker 4s infinite; }
-@keyframes flicker {
-  0%,19%,21%,23%,25%,54%,56%,100% { opacity:1; }
-  20%,24%,55% { opacity:0.6; }
-}
-
-.hero-sub {
-  font-size: 1rem; color: var(--sub); max-width: 520px; margin: 20px auto 0;
-  line-height: 1.7; position: relative; animation: fadeDown 1s ease both 0.2s;
-}
-
-.hero-btns {
-  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-  margin-top: 40px; position: relative; animation: fadeDown 1s ease both 0.3s;
-}
-.btn-primary {
-  background: linear-gradient(135deg, var(--red), var(--orange));
-  color: #fff; border: none; padding: 14px 36px;
-  font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 700;
-  border-radius: 4px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(255,106,0,0.4);
-  transition: box-shadow 0.3s, transform 0.2s;
-  text-decoration: none; display: inline-block;
-}
-.btn-primary:hover { box-shadow: 0 0 40px rgba(255,106,0,0.7); transform: translateY(-2px); }
-
-.btn-secondary {
-  background: transparent; color: var(--orange);
-  border: 1.5px solid var(--orange); padding: 14px 36px;
-  font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 700;
-  border-radius: 4px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
-  transition: all 0.3s; text-decoration: none; display: inline-block;
-  box-shadow: inset 0 0 0 0 var(--orange);
-}
-.btn-secondary:hover {
-  background: var(--orange); color: #000;
-  box-shadow: var(--glow-o);
-}
-
-@keyframes fadeDown {
-  from { opacity:0; transform:translateY(-20px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-
-/* ── Stats strip ── */
-.stats {
-  display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
-  background: var(--bg2); border-top: 1px solid rgba(255,106,0,0.12);
-  border-bottom: 1px solid rgba(255,106,0,0.12);
-}
-.stat-item {
-  padding: 32px 48px; text-align: center;
-  border-right: 1px solid rgba(255,106,0,0.1);
-}
-.stat-item:last-child { border-right: none; }
-.stat-num {
-  font-family: 'Orbitron', monospace; font-size: 2.2rem; font-weight: 900;
-  color: var(--orange); text-shadow: var(--glow-o); display: block;
-}
-.stat-label { font-size: 0.78rem; color: var(--sub); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; display: block; }
-
-/* ── Services ── */
-.section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-.section-title {
-  font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900;
-  text-align: center; margin-bottom: 8px;
-  color: var(--orange); text-shadow: var(--glow-o);
-}
-.section-sub { text-align: center; color: var(--sub); font-size: 0.9rem; margin-bottom: 48px; }
-
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-.service-card {
-  background: var(--card); border: 1px solid rgba(255,106,0,0.12);
-  border-radius: 8px; padding: 32px 24px; text-align: center;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  cursor: default;
-}
-.service-card:hover {
-  border-color: var(--orange); transform: translateY(-6px);
-  box-shadow: 0 0 30px rgba(255,106,0,0.15);
-}
-.service-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
-.service-card h3 { font-family:'Orbitron',monospace; font-size:0.85rem; color:var(--orange); margin-bottom:10px; letter-spacing:1px; }
-.service-card p  { font-size:0.82rem; color:var(--sub); line-height:1.6; }
-
-/* ── Why us ── */
-.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.why-card {
-  background: var(--card); border-radius: 8px; padding: 24px;
-  border-left: 3px solid var(--orange);
-  transition: box-shadow 0.3s;
-}
-.why-card:hover { box-shadow: -4px 0 20px rgba(255,106,0,0.2); }
-.why-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.why-card p  { font-size: 0.82rem; color: var(--sub); line-height: 1.6; }
-
-/* ══════════════════════════════════════
-   GALLERY PAGE
-══════════════════════════════════════ */
-.gallery-hero {
-  text-align: center; padding: 60px 24px 40px;
-  background: linear-gradient(180deg, rgba(255,45,45,0.05) 0%, transparent 100%);
-}
-.gallery-hero h2 { font-family:'Orbitron',monospace; font-size:2.2rem; font-weight:900; color:var(--orange); text-shadow:var(--glow-o); }
-.gallery-hero p  { color:var(--sub); margin-top:10px; font-size:0.9rem; }
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px; padding: 0 24px 60px; max-width: 1100px; margin: 0 auto;
-}
-.gallery-item {
-  position: relative; border-radius: 8px; overflow: hidden;
-  border: 1px solid rgba(255,106,0,0.1);
-  aspect-ratio: 4/3;
-  background: var(--card);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: border-color 0.3s, transform 0.3s;
-}
-.gallery-item:hover { border-color: var(--orange); transform: scale(1.02); }
-.gallery-item:hover .gallery-overlay { opacity: 1; }
-
-/* Fake neon sign previews using CSS */
-.sign-preview {
-  font-family: 'Righteous', cursive;
-  font-size: 1.6rem; text-align: center; padding: 20px;
-  line-height: 1.4;
-}
-.sign-red    { color: var(--red); text-shadow: var(--glow-r); }
-.sign-orange { color: var(--orange); text-shadow: var(--glow-o); }
-.sign-amber  { color: var(--amber); text-shadow: var(--glow-a); }
-.sign-multi  {
-  background: linear-gradient(135deg, var(--red), var(--orange), var(--amber));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(255,106,0,0.6));
-}
-
-.gallery-overlay {
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,0.75);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.3s;
-}
-.gallery-overlay span { color: var(--orange); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-.gallery-overlay small { color: var(--sub); font-size: 0.75rem; margin-top: 6px; }
-
-.gallery-tag {
-  position: absolute; top: 12px; left: 12px;
-  background: rgba(255,106,0,0.15); border: 1px solid var(--orange);
-  color: var(--orange); font-size: 0.68rem; font-weight: 700;
-  padding: 3px 10px; border-radius: 20px; letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* order CTA */
-.gallery-cta {
-  text-align: center; padding: 40px 24px 80px;
-  background: linear-gradient(180deg, transparent, rgba(255,45,45,0.05));
-}
-.gallery-cta h3 { font-family:'Orbitron',monospace; font-size:1.4rem; color:var(--text); margin-bottom:10px; }
-.gallery-cta p  { color:var(--sub); margin-bottom:28px; }
-
-/* ══════════════════════════════════════
-   CONTACT / ORDER PAGE
-══════════════════════════════════════ */
-.contact-wrap {
-  max-width: 700px; margin: 0 auto; padding: 60px 24px 80px;
-}
-.contact-title {
-  font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900;
-  color: var(--orange); text-shadow: var(--glow-o); text-align: center; margin-bottom: 8px;
-}
-.contact-sub { text-align:center; color:var(--sub); margin-bottom:40px; font-size:0.9rem; }
-
-.order-form {
-  background: var(--card); border: 1px solid rgba(255,106,0,0.15);
-  border-radius: 12px; padding: 36px;
-}
-.form-group { margin-bottom: 20px; }
-.form-group label {
-  display: block; font-size: 0.8rem; font-weight: 700;
-  color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%; background: #1a1a1a; border: 1px solid rgba(255,106,0,0.2);
-  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.9rem;
-  padding: 12px 16px; border-radius: 6px; outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgba(255,106,0,0.1);
-}
-.form-group select option { background: #1a1a1a; }
-.form-group textarea { resize: vertical; min-height: 110px; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-.submit-btn {
-  width: 100%; padding: 16px;
-  background: linear-gradient(135deg, var(--red), var(--orange));
-  color: #fff; border: none; border-radius: 6px;
-  font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700;
-  cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(255,106,0,0.3);
-  transition: box-shadow 0.3s, transform 0.2s;
-  margin-top: 8px;
-}
-.submit-btn:hover { box-shadow: 0 0 40px rgba(255,106,0,0.6); transform: translateY(-2px); }
-
-.whatsapp-note {
-  background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.2);
-  border-radius: 8px; padding: 16px 20px; margin-bottom: 28px;
-  display: flex; align-items: center; gap: 12px;
-}
-.whatsapp-note span { font-size: 1.6rem; }
-.whatsapp-note p { font-size: 0.85rem; color: #aaa; line-height: 1.5; }
-.whatsapp-note strong { color: #25d366; }
-
-/* contact info cards */
-.info-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
-.info-card {
-  background: var(--card); border: 1px solid rgba(255,106,0,0.1);
-  border-radius: 8px; padding: 20px; text-align: center;
-}
-.info-card .ic-icon { font-size: 1.8rem; margin-bottom: 8px; }
-.info-card h4 { font-size: 0.75rem; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-.info-card p  { font-size: 0.88rem; color: var(--text); font-weight: 600; }
-.info-card small { font-size: 0.76rem; color: var(--sub); }
-
-/* ── Footer ── */
-footer {
-  background: var(--bg2); border-top: 1px solid rgba(255,106,0,0.1);
-  text-align: center; padding: 32px 24px;
-}
-footer .f-logo {
-  font-family: 'Orbitron', monospace; font-size: 1.2rem; font-weight: 900;
-  color: var(--orange); text-shadow: var(--glow-o); margin-bottom: 12px; display: block;
-}
-footer p { font-size: 0.8rem; color: var(--sub); }
-footer a { color: var(--orange); text-decoration: none; }
-
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  nav { padding: 14px 20px; }
-  .nav-links { gap: 20px; }
-  .nav-links a { font-size: 0.75rem; letter-spacing: 1px; }
-  .stat-item { padding: 24px 24px; }
-  .form-row { grid-template-columns: 1fr; }
-  .info-cards { grid-template-columns: 1fr; }
-  .order-form { padding: 24px 16px; }
-}
+/* CONTACT */
+.contact-wrap{max-width:700px;margin:0 auto;padding:60px 24px 80px;}
+.contact-title{font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;color:var(--orange);text-shadow:var(--glow-o);text-align:center;margin-bottom:8px;}
+.contact-sub{text-align:center;color:var(--sub);margin-bottom:40px;font-size:0.9rem;}
+.order-form{background:var(--card);border:1px solid rgba(255,106,0,0.15);border-radius:12px;padding:36px;}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-size:0.8rem;font-weight:700;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:#1a1a1a;border:1px solid rgba(255,106,0,0.2);color:var(--text);font-family:'Poppins',sans-serif;font-size:0.9rem;padding:12px 16px;border-radius:6px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,106,0,0.1);}
+.form-group select option{background:#1a1a1a;}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:none;border-radius:6px;font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 0 20px rgba(255,106,0,0.3);transition:box-shadow 0.3s,transform 0.2s;margin-top:8px;}
+.submit-btn:hover{box-shadow:0 0 40px rgba(255,106,0,0.6);transform:translateY(-2px);}
+.whatsapp-note{background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.2);border-radius:8px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.whatsapp-note span{font-size:1.6rem;}
+.whatsapp-note p{font-size:0.85rem;color:#aaa;line-height:1.5;}
+.whatsapp-note strong{color:#25d366;}
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.info-card{background:var(--card);border:1px solid rgba(255,106,0,0.1);border-radius:8px;padding:20px;text-align:center;}
+.info-card .ic-icon{font-size:1.8rem;margin-bottom:8px;}
+.info-card h4{font-size:0.75rem;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.info-card p{font-size:0.88rem;color:var(--text);font-weight:600;}
+.info-card small{font-size:0.76rem;color:var(--sub);}
+footer{background:var(--bg2);border-top:1px solid rgba(255,106,0,0.1);text-align:center;padding:32px 24px;}
+footer .f-logo{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:var(--orange);text-shadow:var(--glow-o);margin-bottom:12px;display:block;}
+footer p{font-size:0.8rem;color:var(--sub);}
+footer a{color:var(--orange);text-decoration:none;}
+@media(max-width:640px){nav{padding:14px 20px;}.nav-links{gap:16px;}.nav-links a{font-size:0.72rem;}.stat-item{padding:20px 20px;}.form-row{grid-template-columns:1fr;}.info-cards{grid-template-columns:1fr;}.order-form{padding:20px 14px;}.filter-btn{font-size:0.75rem;padding:6px 14px;}}
 </style>
 </head>
 <body>
-
 <div id="cursor"></div>
 
-<!-- ── Navigation ── -->
 <nav>
-  <a class="nav-logo" href="#" onclick="showPage('home')">MNS</a>
+  <a class="nav-logo" href="#" onclick="showPage('home');return false;">MNS</a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
-    <li><a href="#" onclick="showPage('gallery')" id="nav-gallery">Gallery</a></li>
-    <li><a href="#" onclick="showPage('contact')" id="nav-contact">Order Now</a></li>
+    <li><a href="#" onclick="showPage('home');return false;" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('gallery');return false;" id="nav-gallery">Gallery</a></li>
+    <li><a href="#" onclick="showPage('contact');return false;" id="nav-contact">Order Now</a></li>
   </ul>
 </nav>
 
-<!-- ══════════════════════════════════════
-     HOME PAGE
-══════════════════════════════════════ -->
+<!-- ═══ HOME ═══ -->
 <div id="page-home" class="page active">
-
-  <!-- Hero -->
   <section class="hero">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+    <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
     <p class="hero-eyebrow">✦ Sahiwal, Pakistan ✦</p>
-    <h1>
-      <span class="neon-r flicker">MODERN</span><br/>
-      <span class="neon-o">NEON SIGN</span>
-    </h1>
+    <h1><span class="neon-r flicker">MODERN</span><br/><span class="neon-o">NEON SIGN</span></h1>
     <p class="hero-sub">Custom neon signs, 2D & 3D signboards for weddings, businesses, events & home decor — handcrafted in Sahiwal.</p>
     <div class="hero-btns">
-      <a class="btn-primary" href="#" onclick="showPage('contact')">🛒 Order on WhatsApp</a>
-      <a class="btn-secondary" href="#" onclick="showPage('gallery')">View Gallery</a>
+      <a class="btn-primary" href="#" onclick="showPage('contact');return false;">🛒 Order on WhatsApp</a>
+      <a class="btn-secondary" href="#" onclick="showPage('gallery');return false;">View Gallery</a>
     </div>
   </section>
 
-  <!-- Stats -->
   <div class="stats">
     <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Signs Made</span></div>
     <div class="stat-item"><span class="stat-num">5+</span><span class="stat-label">Years Experience</span></div>
@@ -439,65 +166,29 @@ footer a { color: var(--orange); text-decoration: none; }
     <div class="stat-item"><span class="stat-num">2D/3D</span><span class="stat-label">Both Available</span></div>
   </div>
 
-  <!-- Services -->
   <div class="section">
     <h2 class="section-title">Our Services</h2>
     <p class="section-sub">Everything we craft — glowing with quality</p>
     <div class="services-grid">
-      <div class="service-card">
-        <span class="service-icon">✨</span>
-        <h3>Custom Neon Signs</h3>
-        <p>Any text, logo or shape — we make it glow exactly the way you imagine.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">💍</span>
-        <h3>Wedding & Events</h3>
-        <p>Romantic neon backdrops, names, dates & quotes for your special day.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🏪</span>
-        <h3>Business Signs</h3>
-        <p>Shop fronts, restaurant signs, brand logos — make your business shine.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🏠</span>
-        <h3>Home Decor</h3>
-        <p>Bedroom vibes, living room art, motivational quotes — light up your space.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">📦</span>
-        <h3>2D Signboards</h3>
-        <p>Flat cutout signs with LED or neon lighting, any size and color.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🔷</span>
-        <h3>3D Signboards</h3>
-        <p>Eye-catching 3D raised letters and logos with stunning depth effect.</p>
-      </div>
+      <div class="service-card"><span class="service-icon">✨</span><h3>Custom Neon Signs</h3><p>Any text, logo or shape — we make it glow exactly the way you imagine.</p></div>
+      <div class="service-card"><span class="service-icon">💍</span><h3>Wedding & Events</h3><p>Romantic neon backdrops, names, dates & quotes for your special day.</p></div>
+      <div class="service-card"><span class="service-icon">🏪</span><h3>Business Signs</h3><p>Shop fronts, restaurant signs, brand logos — make your business shine.</p></div>
+      <div class="service-card"><span class="service-icon">🏠</span><h3>Home Decor</h3><p>Bedroom vibes, living room art, motivational quotes — light up your space.</p></div>
+      <div class="service-card"><span class="service-icon">📦</span><h3>2D Signboards</h3><p>Flat cutout signs with LED or neon lighting, any size and color.</p></div>
+      <div class="service-card"><span class="service-icon">🔷</span><h3>3D Signboards</h3><p>Eye-catching 3D raised letters and logos with stunning depth effect.</p></div>
+      <div class="service-card"><span class="service-icon">🎂</span><h3>Birthday Signs</h3><p>Glowing Happy Birthday signs — make every celebration unforgettable.</p></div>
+      <div class="service-card"><span class="service-icon">🔤</span><h3>Acrylic / Logo Signs</h3><p>Sharp acrylic logo boards with LED backlight for shops and offices.</p></div>
     </div>
   </div>
 
-  <!-- Why us -->
   <div class="section" style="padding-top:0">
     <h2 class="section-title">Why Choose Us?</h2>
     <p class="section-sub">We don't just make signs — we make statements</p>
     <div class="why-grid">
-      <div class="why-card">
-        <h4>⚡ Fast Delivery</h4>
-        <p>Most orders ready in 3–7 days. Urgent orders also available.</p>
-      </div>
-      <div class="why-card">
-        <h4>💰 Best Price in Sahiwal</h4>
-        <p>Premium quality at prices that don't burn a hole in your pocket.</p>
-      </div>
-      <div class="why-card">
-        <h4>🎨 100% Custom</h4>
-        <p>Every sign is unique. You dream it, we build it exactly as you want.</p>
-      </div>
-      <div class="why-card">
-        <h4>🛡️ Warranty Included</h4>
-        <p>All our neon signs come with a warranty. Your satisfaction guaranteed.</p>
-      </div>
+      <div class="why-card"><h4>⚡ Fast Delivery</h4><p>Most orders ready in 3–7 days. Urgent orders also available.</p></div>
+      <div class="why-card"><h4>💰 Best Price in Sahiwal</h4><p>Premium quality at prices that don't burn a hole in your pocket.</p></div>
+      <div class="why-card"><h4>🎨 100% Custom</h4><p>Every sign is unique. You dream it, we build it exactly as you want.</p></div>
+      <div class="why-card"><h4>🛡️ Warranty Included</h4><p>All our neon signs come with a warranty. Your satisfaction guaranteed.</p></div>
     </div>
   </div>
 
@@ -507,69 +198,140 @@ footer a { color: var(--orange); text-decoration: none; }
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════
-     GALLERY PAGE
-══════════════════════════════════════ -->
+<!-- ═══ GALLERY ═══ -->
 <div id="page-gallery" class="page">
   <div class="gallery-hero">
     <h2>Our Work</h2>
-    <p>A glimpse of what we create — every sign tells a story</p>
+    <p>Real signs made by us — tap any photo to view full size</p>
   </div>
 
-  <div class="gallery-grid">
+  <!-- Filter buttons -->
+  <div class="filter-wrap">
+    <button class="filter-btn active" onclick="filterGallery('all',this)">🔆 All</button>
+    <button class="filter-btn" onclick="filterGallery('custom',this)">✨ Custom Neon</button>
+    <button class="filter-btn" onclick="filterGallery('wedding',this)">💍 Wedding</button>
+    <button class="filter-btn" onclick="filterGallery('business',this)">🏪 Business</button>
+    <button class="filter-btn" onclick="filterGallery('birthday',this)">🎂 Birthday</button>
+    <button class="filter-btn" onclick="filterGallery('acrylic',this)">🔤 Acrylic / Logo</button>
+    <button class="filter-btn" onclick="filterGallery('2d',this)">📦 2D Signs</button>
+    <button class="filter-btn" onclick="filterGallery('3d',this)">🔷 3D Signs</button>
+  </div>
 
-    <div class="gallery-item">
+  <!-- Gallery grid — all photos from your images folder -->
+  <div class="gallery-grid" id="galleryGrid">
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/bismillah-neonsign.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/bismillah-neonsign.jpg" alt="Bismillah Neon Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Bismillah Neon</span><small>Custom Arabic neon sign</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="wedding" onclick="openLB('images/couple-neonsign324.jpg')">
       <span class="gallery-tag">Wedding</span>
-      <div class="sign-preview sign-red">Mr & Mrs<br/>❤️</div>
-      <div class="gallery-overlay"><span>Wedding Sign</span><small>Custom neon couple name</small></div>
+      <img src="images/couple-neonsign324.jpg" alt="Couple Neon Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Couple Neon Sign</span><small>Wedding & couple names</small></div>
     </div>
 
-    <div class="gallery-item">
+    <div class="gallery-item" data-cat="2d" onclick="openLB('images/custom-2dsign324.jpg')">
+      <span class="gallery-tag">2D Sign</span>
+      <img src="images/custom-2dsign324.jpg" alt="Custom 2D Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom 2D Sign</span><small>Flat LED signboard</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="3d" onclick="openLB('images/custom-3dsign1080.jpg')">
+      <span class="gallery-tag">3D Sign</span>
+      <img src="images/custom-3dsign1080.jpg" alt="Custom 3D Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom 3D Sign</span><small>3D raised letter board</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="acrylic" onclick="openLB('images/custom-acrylic-logo288.jpg')">
+      <span class="gallery-tag">Acrylic Logo</span>
+      <img src="images/custom-acrylic-logo288.jpg" alt="Acrylic Logo Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Acrylic Logo</span><small>LED backlit acrylic board</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="acrylic" onclick="openLB('images/custom-acrylic-logo900.jpg')">
+      <span class="gallery-tag">Acrylic Logo</span>
+      <img src="images/custom-acrylic-logo900.jpg" alt="Acrylic Logo Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Acrylic Logo</span><small>Custom shop logo board</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/customname-neon.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/customname-neon.jpg" alt="Custom Name Neon" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom Name Neon</span><small>Any name in neon glow</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/custom-neonsign72.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/custom-neonsign72.jpg" alt="Custom Neon Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom Neon Sign</span><small>Handcrafted neon sign</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/custom-neonsign504.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/custom-neonsign504.jpg" alt="Custom Neon Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom Neon Sign</span><small>Glowing neon display</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="birthday" onclick="openLB('images/happybirthday-neon.jpg')">
+      <span class="gallery-tag">Birthday</span>
+      <img src="images/happybirthday-neon.jpg" alt="Happy Birthday Neon" loading="lazy"/>
+      <div class="gallery-overlay"><span>Happy Birthday</span><small>Birthday party neon sign</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="acrylic" onclick="openLB('images/batman-acrylic-logo.jpg')">
+      <span class="gallery-tag">Acrylic Logo</span>
+      <img src="images/batman-acrylic-logo.jpg" alt="Batman Acrylic Logo" loading="lazy"/>
+      <div class="gallery-overlay"><span>Batman Acrylic</span><small>Custom logo acrylic sign</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="business" onclick="openLB('images/IMG-20251129-WA0086.jpg')">
       <span class="gallery-tag">Business</span>
-      <div class="sign-preview sign-orange">OPEN<br/>24/7</div>
-      <div class="gallery-overlay"><span>Shop Sign</span><small>Business front neon</small></div>
+      <img src="images/IMG-20251129-WA0086.jpg" alt="Business Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Business Sign</span><small>Shop front signboard</small></div>
     </div>
 
-    <div class="gallery-item">
-      <span class="gallery-tag">Home Decor</span>
-      <div class="sign-preview sign-amber">Good<br/>Vibes Only ✌</div>
-      <div class="gallery-overlay"><span>Home Decor</span><small>Bedroom neon sign</small></div>
-    </div>
-
-    <div class="gallery-item">
-      <span class="gallery-tag">3D Board</span>
-      <div class="sign-preview sign-multi">CAFE<br/>★★★★★</div>
-      <div class="gallery-overlay"><span>3D Signboard</span><small>Restaurant branding</small></div>
-    </div>
-
-    <div class="gallery-item">
-      <span class="gallery-tag">Event</span>
-      <div class="sign-preview sign-red">Happy<br/>Birthday 🎂</div>
-      <div class="gallery-overlay"><span>Event Sign</span><small>Birthday party neon</small></div>
-    </div>
-
-    <div class="gallery-item">
-      <span class="gallery-tag">Custom</span>
-      <div class="sign-preview sign-orange">Your<br/>Name Here</div>
-      <div class="gallery-overlay"><span>Custom Name Sign</span><small>Any name, any color</small></div>
-    </div>
-
-    <div class="gallery-item">
-      <span class="gallery-tag">2D Board</span>
-      <div class="sign-preview sign-amber">SALON<br/>✂ Beauty</div>
-      <div class="gallery-overlay"><span>2D Signboard</span><small>Salon LED sign</small></div>
-    </div>
-
-    <div class="gallery-item">
-      <span class="gallery-tag">Wedding</span>
-      <div class="sign-preview sign-red">Forever<br/>& Always 💕</div>
-      <div class="gallery-overlay"><span>Wedding Backdrop</span><small>Romantic neon wall</small></div>
-    </div>
-
-    <div class="gallery-item">
+    <div class="gallery-item" data-cat="business" onclick="openLB('images/IMG-20251129-WA0088.jpg')">
       <span class="gallery-tag">Business</span>
-      <div class="sign-preview sign-multi">BARBER<br/>SHOP ✂</div>
-      <div class="gallery-overlay"><span>Barber Sign</span><small>Shop front 3D sign</small></div>
+      <img src="images/IMG-20251129-WA0088.jpg" alt="Business Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Business Sign</span><small>Professional shop sign</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="business" onclick="openLB('images/IMG-20251129-WA0089.jpg')">
+      <span class="gallery-tag">Business</span>
+      <img src="images/IMG-20251129-WA0089.jpg" alt="Business Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Business Sign</span><small>Custom shop branding</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/IMG-20251129-WA0090.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/IMG-20251129-WA0090.jpg" alt="Custom Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom Sign</span><small>Unique neon design</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/IMG-20251129-WA0091.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/IMG-20251129-WA0091.jpg" alt="Custom Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom Sign</span><small>Handcrafted neon art</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="3d" onclick="openLB('images/IMG-20251129-WA0092.jpg')">
+      <span class="gallery-tag">3D Sign</span>
+      <img src="images/IMG-20251129-WA0092.jpg" alt="3D Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>3D Sign</span><small>3D raised signboard</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="business" onclick="openLB('images/IMG-20251129-WA0093.jpg')">
+      <span class="gallery-tag">Business</span>
+      <img src="images/IMG-20251129-WA0093.jpg" alt="Business Sign" loading="lazy"/>
+      <div class="gallery-overlay"><span>Business Sign</span><small>Commercial neon sign</small></div>
+    </div>
+
+    <div class="gallery-item" data-cat="custom" onclick="openLB('images/IMG-20251129-WA0095.jpg')">
+      <span class="gallery-tag">Custom Neon</span>
+      <img src="images/IMG-20251129-WA0095.jpg" alt="Custom Neon" loading="lazy"/>
+      <div class="gallery-overlay"><span>Custom Neon</span><small>Special neon creation</small></div>
     </div>
 
   </div>
@@ -577,7 +339,7 @@ footer a { color: var(--orange); text-decoration: none; }
   <div class="gallery-cta">
     <h3>Want a sign like these?</h3>
     <p>Send us your idea on WhatsApp and get a free quote in minutes!</p>
-    <a class="btn-primary" href="#" onclick="showPage('contact')">🛒 Order on WhatsApp</a>
+    <a class="btn-primary" href="#" onclick="showPage('contact');return false;">🛒 Order on WhatsApp</a>
   </div>
 
   <footer>
@@ -586,119 +348,83 @@ footer a { color: var(--orange); text-decoration: none; }
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════
-     CONTACT / ORDER PAGE
-══════════════════════════════════════ -->
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLB()">
+  <span class="lb-close" onclick="closeLB()">✕</span>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
 <div id="page-contact" class="page">
   <div class="contact-wrap">
     <h2 class="contact-title">Place Your Order</h2>
     <p class="contact-sub">Fill the form below — your order goes straight to our WhatsApp!</p>
-
     <div class="whatsapp-note">
       <span>💬</span>
-      <p>Your order will be sent directly to our WhatsApp number <strong>+92 300 0767300</strong>. We'll reply with a quote within a few hours!</p>
+      <p>Your order will be sent directly to our WhatsApp <strong>+92 300 0767300</strong>. We'll reply with a quote within a few hours!</p>
     </div>
-
     <div class="order-form">
       <div class="form-row">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" id="f-name" placeholder="e.g. Ahmed Ali"/>
-        </div>
-        <div class="form-group">
-          <label>Your Phone</label>
-          <input type="tel" id="f-phone" placeholder="+92 3XX XXXXXXX"/>
-        </div>
+        <div class="form-group"><label>Your Name</label><input type="text" id="f-name" placeholder="e.g. Ahmed Ali"/></div>
+        <div class="form-group"><label>Your Phone</label><input type="tel" id="f-phone" placeholder="+92 3XX XXXXXXX"/></div>
       </div>
-
       <div class="form-group">
         <label>Sign Type</label>
         <select id="f-type">
           <option value="">— Select type —</option>
           <option>Custom Neon Sign</option>
-          <option>Wedding / Event Sign</option>
+          <option>Wedding / Couple Sign</option>
           <option>Business / Shop Sign</option>
+          <option>Birthday Neon Sign</option>
+          <option>Acrylic / Logo Sign</option>
           <option>Home Decor Sign</option>
           <option>2D Signboard</option>
           <option>3D Signboard</option>
           <option>Other / Not Sure</option>
         </select>
       </div>
-
       <div class="form-row">
         <div class="form-group">
           <label>Sign Size</label>
           <select id="f-size">
             <option value="">— Select size —</option>
-            <option>Small (upto 1 foot)</option>
-            <option>Medium (1–2 feet)</option>
-            <option>Large (2–4 feet)</option>
-            <option>Extra Large (4+ feet)</option>
-            <option>Not Sure</option>
+            <option>Small — 1 foot</option>
+            <option>Medium — 2 feet</option>
+            <option>Large — 3 feet</option>
+            <option>Extra Large — 4 feet</option>
+            <option>XXL — 5 feet</option>
+            <option>Giant — 6+ feet</option>
+            <option>Custom size (write below)</option>
           </select>
         </div>
         <div class="form-group">
           <label>Neon Color</label>
           <select id="f-color">
             <option value="">— Select color —</option>
-            <option>Red</option>
-            <option>Orange</option>
+            <option>Red 🔴</option>
+            <option>Orange 🟠</option>
             <option>Yellow / Warm White</option>
-            <option>Blue</option>
-            <option>Green</option>
-            <option>Pink</option>
-            <option>Purple</option>
-            <option>White</option>
-            <option>Multi Color</option>
-            <option>Not Sure (advise me)</option>
+            <option>Blue 🔵</option>
+            <option>Green 🟢</option>
+            <option>Pink 🩷</option>
+            <option>Purple 🟣</option>
+            <option>White ⚪</option>
+            <option>Multi Color 🌈</option>
+            <option>Not Sure — advise me</option>
           </select>
         </div>
       </div>
-
-      <div class="form-group">
-        <label>Text / Design Details</label>
-        <textarea id="f-details" placeholder="e.g. Write 'Ahmad & Fatima' in cursive style for wedding backdrop, red color, 3 feet wide…"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>City / Delivery Location</label>
-        <input type="text" id="f-city" placeholder="e.g. Lahore, Karachi, Sahiwal…"/>
-      </div>
-
-      <button class="submit-btn" onclick="sendOrder()">
-        📲 Send Order to WhatsApp
-      </button>
+      <div class="form-group"><label>Text / Design Details</label><textarea id="f-details" placeholder="e.g. Write 'Ahmad & Fatima' in cursive style, red color, 3 feet wide for wedding backdrop…"></textarea></div>
+      <div class="form-group"><label>City / Delivery Location</label><input type="text" id="f-city" placeholder="e.g. Lahore, Karachi, Sahiwal…"/></div>
+      <button class="submit-btn" onclick="sendOrder()">📲 Send Order to WhatsApp</button>
     </div>
-
-    <!-- Info cards -->
     <div class="info-cards">
-      <div class="info-card">
-        <div class="ic-icon">📍</div>
-        <h4>Location</h4>
-        <p>Sahiwal, Pakistan</p>
-        <small>Delivery across Pakistan</small>
-      </div>
-      <div class="info-card">
-        <div class="ic-icon">💬</div>
-        <h4>WhatsApp</h4>
-        <p><a href="https://wa.me/923000767300" style="color:var(--orange)">+92 300 0767300</a></p>
-        <small>Reply within a few hours</small>
-      </div>
-      <div class="info-card">
-        <div class="ic-icon">⏱️</div>
-        <h4>Delivery Time</h4>
-        <p>3 – 7 Days</p>
-        <small>Urgent orders available</small>
-      </div>
-      <div class="info-card">
-        <div class="ic-icon">💰</div>
-        <h4>Payment</h4>
-        <p>Easy Paisa / Jazz Cash</p>
-        <small>Cash on delivery available</small>
-      </div>
+      <div class="info-card"><div class="ic-icon">📍</div><h4>Location</h4><p>Sahiwal, Pakistan</p><small>Delivery across Pakistan</small></div>
+      <div class="info-card"><div class="ic-icon">💬</div><h4>WhatsApp</h4><p><a href="https://wa.me/923000767300" style="color:var(--orange)">+92 300 0767300</a></p><small>Reply within a few hours</small></div>
+      <div class="info-card"><div class="ic-icon">⏱️</div><h4>Delivery Time</h4><p>3 – 7 Days</p><small>Urgent orders available</small></div>
+      <div class="info-card"><div class="ic-icon">💰</div><h4>Payment</h4><p>Easy Paisa / Jazz Cash</p><small>Cash on delivery available</small></div>
     </div>
   </div>
-
   <footer>
     <span class="f-logo">MODERN NEON SIGN</span>
     <p>Sahiwal, Pakistan &nbsp;·&nbsp; <a href="https://wa.me/923000767300">+92 300 0767300</a> &nbsp;·&nbsp; Handcrafted with 🔥</p>
@@ -706,53 +432,46 @@ footer a { color: var(--orange); text-decoration: none; }
 </div>
 
 <script>
-// ── Custom cursor ──
 const cur = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top  = e.clientY + 'px';
-});
+document.addEventListener('mousemove', e => { cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; });
 
-// ── Page navigation ──
 function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  document.getElementById('nav-' + id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  return false;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── WhatsApp order ──
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (cat==='all' || item.dataset.cat===cat) {
+      item.style.display='block';
+      item.style.animation='none';
+      setTimeout(()=>item.style.animation='fadeUp 0.35s ease both',10);
+    } else {
+      item.style.display='none';
+    }
+  });
+}
+
+function openLB(src) { document.getElementById('lb-img').src=src; document.getElementById('lightbox').classList.add('open'); }
+function closeLB()   { document.getElementById('lightbox').classList.remove('open'); document.getElementById('lb-img').src=''; }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
+
 function sendOrder() {
-  const name    = document.getElementById('f-name').value.trim();
-  const phone   = document.getElementById('f-phone').value.trim();
-  const type    = document.getElementById('f-type').value;
-  const size    = document.getElementById('f-size').value;
-  const color   = document.getElementById('f-color').value;
-  const details = document.getElementById('f-details').value.trim();
-  const city    = document.getElementById('f-city').value.trim();
-
-  if (!name || !type || !details) {
-    alert('Please fill in at least your Name, Sign Type and Design Details.');
-    return;
-  }
-
-  const msg =
-`🔆 *New Order — Modern Neon Sign*
-
-👤 *Name:* ${name}
-📞 *Phone:* ${phone || 'Not provided'}
-🏷️ *Sign Type:* ${type}
-📐 *Size:* ${size || 'Not specified'}
-🎨 *Color:* ${color || 'Not specified'}
-📝 *Details:* ${details}
-📍 *City:* ${city || 'Not specified'}
-
-_Sent from Modern Neon Sign website_`;
-
-  const url = 'https://wa.me/923000767300?text=' + encodeURIComponent(msg);
-  window.open(url, '_blank');
+  const name=document.getElementById('f-name').value.trim();
+  const phone=document.getElementById('f-phone').value.trim();
+  const type=document.getElementById('f-type').value;
+  const size=document.getElementById('f-size').value;
+  const color=document.getElementById('f-color').value;
+  const details=document.getElementById('f-details').value.trim();
+  const city=document.getElementById('f-city').value.trim();
+  if(!name||!type||!details){alert('Please fill in your Name, Sign Type and Design Details.');return;}
+  const msg=`🔆 *New Order — Modern Neon Sign*\n\n👤 *Name:* ${name}\n📞 *Phone:* ${phone||'Not provided'}\n🏷️ *Sign Type:* ${type}\n📐 *Size:* ${size||'Not specified'}\n🎨 *Color:* ${color||'Not specified'}\n📝 *Details:* ${details}\n📍 *City:* ${city||'Not specified'}\n\n_Sent from Modern Neon Sign website_`;
+  window.open('https://wa.me/923000767300?text='+encodeURIComponent(msg),'_blank');
 }
 </script>
 </body>
